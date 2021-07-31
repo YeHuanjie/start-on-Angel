@@ -621,4 +621,35 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   ```
 
 ## Q&A
-1.
+1. Q: torchvision conflicts <br>
+   A: change torchvision=0.4.2 in Dockerfile<br>
+2. Q: spark submit always (state: ACCEPTED)<br>
+   A: first, decreace spark-submit conf--driver-memory \--num-executors \ --executor-cores \--executor-memory \<br>
+      then kill the application<br>
+      ```
+      yarn application -kill application_ID
+      ```
+      stop Hadoop in `/usr/local/hadoop/sbin`
+      ```
+      ./stop-all.sh
+      ```
+      clean files in `/home/hadoop2/hadoop/hdfs/name` and `/home/hadoop2/hadoop/hdfs/data`
+      ```
+      cd /home/hadoop2/hadoop/hdfs/name
+      rm -r current
+      cd /home/hadoop2/hadoop/hdfs/data
+      rm -r dfs nm-local-dir
+      ```
+      format hadoop in `/usr/local/hadoop/bin`
+      ```
+      ./hadoop namenode -format
+      ```
+      restart hadoop in `/usr/local/hadoop/sbin`
+      ```
+      ./start-all.sh
+      ```
+3. Q: application finished with status:failed
+   A: check logs for more info
+      ```
+      yarn logs -applicationId xxxapplicationIdxxxx
+      ```
