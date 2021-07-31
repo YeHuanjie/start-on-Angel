@@ -358,6 +358,42 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
     </property>
   <configuration>
   ```
+  edit `slaves`
+  ```
+  vim slaves
+  ```
+  add master `h01` and slave `h02` <br>
+  if you need, you can add more slaves, for example `h03`  `h04` ...
+  ```
+  h01
+  h02
+  ```
+  
+  #### 1.5 build h01 and h02 containers
+  export the Ubuntu container as an iamge
+  ```
+  sudo docker commit -m "haddop" -a "hadoop" xxContainer_IDxxx newhadoop
+  ```
+  run container `h01`
+  ```
+  sudo docker run -it --network hadoop -h "h01" --name "h01" -p 50070:50070 -p 8088:8088 newhadoop /bin/bash
+  ```
+  run container `h02`
+  ```
+  sudo docker run -it --network hadoop -h "h02" --name "h02" newhadoop /bin/bash
+  ```
+  format Hadoop
+  ```
+  cd /usr/local/hadoop/bin#
+  ./hadoop namenode -format
+  ```
+  start Hadoop
+  ```
+  cd /usr/local/hadoop/sbin/
+  ./start-all.sh 
+  ```
+  you can check info on web h01:8088 / h01:50070 <br>
+  check the hadoop state by `./hadoop dfsadmin -report`
   
   
 
