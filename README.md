@@ -4,7 +4,7 @@ the whole project is built in docker, Ubuntu
 
 ## dependencies
 1. docker 
-2. jav=1.8
+2. java=1.8
 3. maven=3.3.9
 4. scala=2.13.0
 5. protobuf=2.5
