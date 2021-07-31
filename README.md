@@ -648,7 +648,7 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
       ```
       ./start-all.sh
       ```
-3. Q: application finished with status:failed
+3. Q: application finished with status:failed<br>
    A: check logs for more info
       ```
       yarn logs -applicationId xxxapplicationIdxxxx
