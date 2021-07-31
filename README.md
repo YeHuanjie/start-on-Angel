@@ -16,7 +16,7 @@ the whole project is built in docker, Ubuntu
 11. pytorch=1.3.1
 12. torchvision=0.4.2
 
-## step1：build Psedo-Distributed Hadoop Cluster 
+## step1：build Pseudo-Distributed Hadoop Cluster 
 ref：https://zhuanlan.zhihu.com/p/59758201<br>
 
   #### 1.1 install and run docker in Ubuntu 16.04
@@ -453,7 +453,54 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   ```
   
   #### 1.7 install Spark
-  
+  ```
+  wget https://archive.apache.org/dist/spark/spark-2.3.0/spark-2.3.0-bin-hadoop2.7.tgz
+  tar -zxvf spark-2.3.0-bin-hadoop2.7.tgz  -C /usr/local/
+  cd /usr/local/
+  mv spark-2.3.0-bin-hadoop2.7 spark-2.3.0
+  ```
+  edit `/etc/profile`
+  ```
+  export SPARK_HOME=/usr/local/spark-2.3.0
+  export PATH=$PATH:$SPARK_HOME/bin
+  ```
+  make it effective
+  ```
+  source /etc/profile
+  ```
+  you need do it again in `h02` as well as `h03` ...<br> 
+  ```
+  ssh h02
+  xxxxxxx
+  ```
+  edit conf `cd /usr/local/spark-2.4.0/conf`
+  ```
+  mv spark-env.sh.template spark-env.sh 
+  ```
+  edit `spark-env.sh`
+  ```
+  export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+  export HADOOP_HOME=/usr/local/hadoop
+  export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop
+  export SCALA_HOME=/usr/share/scala
+
+  export SPARK_MASTER_HOST=h01
+  export SPARK_MASTER_IP=h01
+  export SPARK_WORKER_MEMORY=4g
+  ```
+  rename `slaves.template` as `slaves`
+  ```
+  mv slaves.template slaves  
+  ```
+  edit `slaves`
+  ```
+  h01
+  h02
+  ```
+  copy files to h02
+  ```
+  scp -r /usr/local/spark-2.3.0 root@h02:/usr/local/
+  ```
 
 ## step2：build Angel and pytorch-on-Angel
 
