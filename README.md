@@ -582,7 +582,7 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   hdfs dfs -put /usr/local/angel-2.4.0-bin/data/ /
   hdfs dfs -put /usr/local/angel-2.4.0-bin/lib/ /
   ```
-  #### 2.2.4 run example
+  #### 2.2.4 run deepfm example
   ref：https://earlytobed.notion.site/Angel-2220b7d8f3f446a3aa4c6fc3f65c4c93<br>
   ```
   #!/bin/bash
@@ -621,10 +621,11 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   ```
 
 ## Q&A
-1. Q: torchvision conflicts <br>
+1. Q: torchvision version conflicts <br>
    A: change torchvision=0.4.2 in Dockerfile<br>
 2. Q: spark submit always (state: ACCEPTED)<br>
-   A: first, decreace spark-submit conf--driver-memory \--num-executors \ --executor-cores \--executor-memory \<br>
+   A: first, decreace spark-submit conf --driver-memory \ --num-executors \ --executor-cores \ --executor-memory \
+      <br>
       then kill the application<br>
       ```
       yarn application -kill application_ID
