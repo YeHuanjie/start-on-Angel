@@ -395,6 +395,64 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   you can check info on web h01:8088 / h01:50070 <br>
   check the hadoop state by `./hadoop dfsadmin -report`
   
+  #### 1.6 install hbase
+  ```
+  wget https://mirrors.nav.ro/apache/hbase/1.4.13/hbase-1.4.13-bin.tar.gz
+  tar -zxvf hbase-1.4.13-bin.tar.gz -C /usr/local/
+  ```
+  edit `/etc/profile` by `vim /etc/profile`, add
+  ```
+  export HBASE_HOME=/usr/local/hbase-1.4.13
+  export PATH=$PATH:$HBASE_HOME/bin
+  ```
+  then `source /etc/profile` <br>
+  next, you need do it again in `h02` as well as `h03` ...<br> 
+  ```
+  ssh h02
+  xxx the same as above step xxx
+  ```
+  cd `/usr/local/hbase-1.4.13/conf`
+  edit `hbase-env.sh`
+  ```
+  export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+  export HBASE_MANAGES_ZK=true
+  ```
+  edit `hbase-site.xml`
+  ```
+    <configuration>
+      <property>
+        <name>hbase.rootdir</name>
+        <value>hdfs://h01:9000/hbase</value>
+      </property>
+      <property>
+        <name>hbase.cluster.distributed</name>
+        <value>true</value>
+      </property>
+      <property>
+        <name>hbase.master</name>
+        <value>h01:60000</value>
+      </property>
+      <property>
+        <name>hbase.zookeeper.quorum</name>
+        <value>h01,h02</value>
+      </property>
+      <property>
+        <name>hbase.zookeeper.property.dataDir</name>
+        <value>/home/hadoop/zoodata</value>
+      </property>
+  </configuration>
+  ```
+  edit `regionservers`
+  ```
+  h01
+  h02
+  ```
+  copy the files to h02 ...
+  ```
+  scp -r /usr/local/hbase-1.4.13 root@h02:/usr/local/
+  ```
+  
+  #### 1.7 install Spark
   
 
 ## step2：build Angel and pytorch-on-Angel
