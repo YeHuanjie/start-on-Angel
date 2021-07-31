@@ -504,8 +504,121 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
 
 ## step2：build Angel and pytorch-on-Angel
 
-## step3：run examples
-ref：https://earlytobed.notion.site/Angel-2220b7d8f3f446a3aa4c6fc3f65c4c93
+  #### 2.1 spark-on-Angel
+  ref:https://github.com/Angel-ML/angel/blob/branch-3.2.0/docs/tutorials/spark_on_angel_quick_start.md <br>
+  
+  #### 2.1.1 get Angel-2.4.0<br>
+  ref:https://github.com/Angel-ML/angel/blob/master/docs/deploy/source_compile_en.md <br>
+  get angel-branch-2.4.0 from github <br>
+  run the following command in the root directory of the source code:
+  ```
+  mvn clean package -Dmaven.test.skip=true
+  ```
+  angel-2.4.0-bin.zip will be generated under dist/target <br>
+  
+  extract angel-2.4.0-bin.zip<br>
+  #### 2.1.2 edit conf
+  edit `angel-2.4.0-bin/bin/spark-on-angl-env.sh` <br>
+  edit `SPARK_HOME`, `ANGEL_HOME`, `ANGEL_HDFS_HOME`
+  ```
+  SPARK_HOME=/usr/local/spark-2.3.0
+  ANGEL_HOME=/usr/local/angel-2.4.0-bin
+  ANGEL_HDFS_HOME=hdfs://h01:9000
+  ANGEL_VERSION=2.4.0
+  ```
+  #### 2.1.3 upload files
+  upload files in `angel-2.4.0-bin` to hdfs
+  ```
+  hdfs dfs -put /usr/local/angel-2.4.0-bin/bin/ /
+  hdfs dfs -put /usr/local/angel-2.4.0-bin/conf/ /
+  hdfs dfs -put /usr/local/angel-2.4.0-bin/data/ /
+  hdfs dfs -put /usr/local/angel-2.4.0-bin/lib/ /
+  ```
+  ```
+  source ./spark-on-angel-env.sh
+  ```
+  check conf by running `angel-2.4.0-bin/bin/SONA-example`
+  ```
+  cd angel-2.4.0-bin/bin; 
+  ./SONA-example
+  ```
+  #### 2.2 pytorch-on-angel
+  ref:https://github.com/Angel-ML/PyTorch-On-Angel<br>
+  #### 2.2.1 get pytorch-on-angel-0.2.0
+  get pytorch-on-angel-0.2.0 from github <br>
+  change contradic settings <br>
+  edit `Dockerfile`
+  ```
+  torchvision=0.4.2
+  ...
+  ENV TORCH_HOME=/opt/libtorch/
+  ENV Torch_DIR=/opt/libtorch/share/cmake/Torch
+  ```
+  or you can choose to edit `cpp/CMakeList.txt`
+  ```
+  set(TORCH_HOME $ENV{TORCH_HOME})
+  ```
+  the generated files 'pytorch-on-angel-0.2.0.jar' 'pytorch-on-angel-0.2.0-jar-with-dependencies.jar' and 'torch.zip' <br>
+  are in ./dist by <br>
+  ```
+  ./build.sh
+  ```
+  #### 2.2.2 get script
+  below script will generate a deepfm model 'deepfm.pt' in ./dist <br>
+  ```
+  ./gen_pt_model.sh python/recommendation/deepfm.py --input_dim 148 --n_fields 13 --embedding_dim 10 --fc_dims 10 5 1
+  ```
+  #### 2.2.3 prepare
+  unzip `torch.zip` to `/angel-2.4.0-bin/bin/torch-lib`<br>
+  move 'pytorch-on-angel-0.2.0.jar' 'pytorch-on-angel-0.2.0-jar-with-dependencies.jar' 'deepfm.pt' to `/angel-2.4.0-bin/bin/'<br>
+  make dir for output
+  ```
+  hdfs dfs -mkdir /output
+  ```
+  upload files to hdfs
+  ```
+  hdfs dfs -put /usr/local/angel-2.4.0-bin/bin/ /
+  hdfs dfs -put /usr/local/angel-2.4.0-bin/conf/ /
+  hdfs dfs -put /usr/local/angel-2.4.0-bin/data/ /
+  hdfs dfs -put /usr/local/angel-2.4.0-bin/lib/ /
+  ```
+  #### 2.2.4 run example
+  ref：https://earlytobed.notion.site/Angel-2220b7d8f3f446a3aa4c6fc3f65c4c93<br>
+  ```
+  #!/bin/bash
+  input=hdfs://h01:9000/data/census_148d_train.libsvn
+  output=hdfs://h01:9000/output
+  source ./spark-on-angel-env.sh
+  JAVA_LIBRARY_PATH=pytorch-on-angel-0.2.0-jar-with-dependencies.jar:pytorch-on-angel-0.2.0.jar
+  torchlib=torch-lib/libpthreadpool.a,torch-lib/libcpuinfo_internals.a,torch-lib/libCaffe2_perfkernels_avx2.a,torch-lib/libgmock.a,torch-lib/libprotoc.a,torch-lib/libnnpack.a,torch-lib/libgtest.a,torch-lib/libpytorch_qnnpack.a,torch-lib/libcaffe2_detectron_ops.so,torch-lib/libCaffe2_perfkernels_avx512.a,torch-lib/libgomp-753e6e92.so.1,torch-lib/libgloo.a,torch-lib/libonnx.a,torch-lib/libtorch_angel.so,torch-lib/libbenchmark_main.a,torch-lib/libcaffe2_protos.a,torch-lib/libgtest_main.a,torch-lib/libprotobuf-lite.a,torch-lib/libasmjit.a,torch-lib/libCaffe2_perfkernels_avx.a,torch-lib/libonnx_proto.a,torch-lib/libfoxi_loader.a,torch-lib/libfbgemm.a,torch-lib/libc10.so,torch-lib/libclog.a,torch-lib/libbenchmark.a,torch-lib/libgmock_main.a,torch-lib/libnnpack_reference_layers.a,torch-lib/libcaffe2_module_test_dynamic.so,torch-lib/libqnnpack.a,torch-lib/libprotobuf.a,torch-lib/libc10d.a,torch-lib/libtorch.so,torch-lib/libcpuinfo.a,torch-lib/libstdc++.so.6,torch-lib/libmkldnn.a
+
+  spark-submit \
+    --master yarn \
+    --deploy-mode cluster \
+    --conf spark.ps.instances=1 \
+    --conf spark.ps.cores=1 \
+    --conf spark.ps.jars=$SONA_ANGEL_JARS \
+    --conf spark.ps.memory=4g \
+    --conf spark.ps.log.level=INFO \
+    --conf spark.driver.extraJavaOptions=-Djava.library.path=$JAVA_LIBRARY_PATH:. \
+    --conf spark.executor.extraJavaOptions=-Djava.library.path=$JAVA_LIBRARY_PATH:. \
+    --conf spark.executor.extraLibraryPath=. \
+    --conf spark.driver.extraLibraryPath=. \
+    --conf spark.executorEnv.OMP_NUM_THREADS=2 \
+    --conf spark.executorEnv.MKL_NUM_THREADS=2 \
+    --name "deepfm for torch on angel" \
+    --jars $SONA_SPARK_JARS \
+    --files deepfm.pt,$torchlib \
+    --driver-memory 4g \
+    --num-executors 1 \
+    --executor-cores 1 \
+    --executor-memory 4g \
+    --class com.tencent.angel.pytorch.examples.supervised.RecommendationExample pytorch-on-angel-0.2.0.jar \
+    trainInput:$input batchSize:128 torchModelPath:deepfm.pt \
+    stepSize:0.001 numEpoch:10 testRatio:0.1 \
+    angelModelOutputPath:$output
+
+  ```
 
 ## Q&A
 1.
