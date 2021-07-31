@@ -1,6 +1,6 @@
 # start-on-Angel
 steps to get started with Tencent project—Angel<br>
-the whole project is built in docker, Ubuntu 16.04
+the whole project is built in docker, Ubuntu
 
 ## dependencies
 1. docker 
@@ -18,10 +18,50 @@ the whole project is built in docker, Ubuntu 16.04
 
 ## step1：build Psedo-Distributed Hadoop Cluster 
 ref：https://zhuanlan.zhihu.com/p/59758201<br>
-  1.1 install docker in Ubuntu 16.04
+
+  #### 1.1 install and run docker in Ubuntu 16.04
+  ##### 1.1.1 install
   ```
   sudo apt-get install docker
   ```
+  ##### 1.1.2 run
+  ```
+  sudo service docker start
+  ```
+  ##### 1.1.3 build network for docker containers
+  ```
+  sudo docker network create --driver=bridge hadoop
+  ```
+  you can check the network by following codes
+  ```
+  sudo docker network ls
+  ```
+  ##### 1.1.4 pull image Ubuntu 16.04 in docker
+  ```
+  sudo docker pull ubuntu:16.04
+  ```
+  you can check the iamge by following codes
+  ```
+  sudo docker images
+  ```
+  start a container by the pulled image
+  ```
+  sudo docker run -it ubuntu:16.04 /bin/bash
+  ```
+  use `exit` to exit the container
+  ```
+  exit
+  ```
+  check all the containers in docker
+  ```
+  sudo docker ps -a
+  ```
+  start the exited container with `container ID`
+  ```
+  sudo docker start xxxIDxxx
+  ```
+  
+  
 
 ## step2：build Angel and pytorch-on-Angel
 
