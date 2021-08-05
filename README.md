@@ -142,7 +142,7 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   ```
   make it 
   ```
-  cd probuf-2.5.0
+  cd protobuf-2.5.0
   ./configure
   make
   make check
