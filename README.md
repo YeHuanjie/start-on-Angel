@@ -104,7 +104,7 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   ```
   check installition
   ```
-  java --version
+  java -version
   ```
   #### 1.2.2 install scala
   ```
@@ -134,7 +134,7 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   #### 1.2.3 install protobuf
   download protobuf-2.5.0 in github
   ```
-  wget xxxthe_linkxxx
+  wget https://github.com/google/protobuf/releases/download/v2.5.0/protobuf-2.5.0.tar.gz
   ```
   extract it to `/usr/local` and name it as `protobuf-2.5.0`
   ```
