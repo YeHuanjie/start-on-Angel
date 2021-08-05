@@ -152,6 +152,16 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   ```
   protoc --version
   ```
+  if error
+  ```
+  protoc: error while loading shared libraries: libprotoc.so.8: cannot open shared object file: No such file or directory
+  ```
+  you need add `usr/local/lib` to `/etc/ld.so.conf`
+  ```
+  vim /etc/ld.so.conf
+  add --> usr/local/lib
+  ldconfig
+  ```
   #### 1.2.4 install maven
   download it in http://maven.apache.org/download.cgi <br>
   find maven-3.3.9 `apache-maven-3.3.9-bin.tar.gz` <br>
