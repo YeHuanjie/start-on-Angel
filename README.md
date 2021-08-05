@@ -138,7 +138,7 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   ```
   extract it to `/usr/local` and name it as `protobuf-2.5.0`
   ```
-  tar -zxvf protobuf-2.5.0.tgz -C /usr/local/
+  tar -zxvf protobuf-2.5.0.tar.gz -C /usr/local/
   ```
   make it 
   ```
