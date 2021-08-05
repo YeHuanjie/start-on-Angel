@@ -166,7 +166,7 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   download it in http://maven.apache.org/download.cgi <br>
   find maven-3.3.9 `apache-maven-3.3.9-bin.tar.gz` <br>
   ```
-  wget xxxthe_linkxxx
+  wget https://archive.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
   ```
   extract it to `/usr/local`
   ```
