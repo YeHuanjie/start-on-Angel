@@ -174,7 +174,7 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   ```
   and rename is as `maven-3.3.9`
   ```
-  mv apache-maven-3.3.9-bin maven-3.3.9
+  mv apache-maven-3.3.9 maven-3.3.9
   ```
   
   #### 1.3 build SSH
