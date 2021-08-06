@@ -366,7 +366,7 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
       <name>yarn.nodenanager.remote-app-log-dir</name>
       <value>/tmp/logs</value>
     </property>
-  <configuration>
+  </configuration>
   ```
   edit `slaves`
   ```
