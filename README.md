@@ -239,7 +239,7 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   export HADOOP_YARN_HOME=$HADOOP_HOME 
   export HADOOP_INSTALL=$HADOOP_HOME 
   export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native 
-  export HADOOP_CONF_DIR=$HADOOP_HOM/etc/hadoop
+  export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
   export HADOOP_LIBEXEC_DIR=$HADOOP_HOME/libexec 
   export JAVA_LIBRARY_PATH=$HADOOP_HOME/lib/native:$JAVA_LIBRARY_PATH
   export HDFS_DATANODE_USER=root
@@ -394,7 +394,7 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   ```
   format Hadoop
   ```
-  cd /usr/local/hadoop/bin#
+  cd /usr/local/hadoop/bin
   ./hadoop namenode -format
   ```
   start Hadoop
