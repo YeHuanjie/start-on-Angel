@@ -382,7 +382,7 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   #### 1.5 build h01 and h02 containers
   export the Ubuntu container as an iamge
   ```
-  sudo docker commit -m "haddop" -a "hadoop" xxContainer_IDxxx newhadoop
+  sudo docker commit -m "hadoop" -a "hadoop" xxContainer_IDxxx newhadoop
   ```
   run container `h01`
   ```
