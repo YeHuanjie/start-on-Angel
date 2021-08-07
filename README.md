@@ -604,7 +604,7 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   ref：https://earlytobed.notion.site/Angel-2220b7d8f3f446a3aa4c6fc3f65c4c93<br>
   ```
   #!/bin/bash
-  input=hdfs://h01:9000/data/census_148d_train.libsvn
+  input=hdfs://h01:9000/data/census/census_148d_train.libsvm
   output=hdfs://h01:9000/output
   source ./spark-on-angel-env.sh
   JAVA_LIBRARY_PATH=pytorch-on-angel-0.2.0-jar-with-dependencies.jar:pytorch-on-angel-0.2.0.jar
