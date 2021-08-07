@@ -533,7 +533,7 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   
   extract angel-2.4.0-bin.zip<br>
   #### 2.1.2 edit conf
-  edit `angel-2.4.0-bin/bin/spark-on-angle-env.sh` <br>
+  edit `angel-2.4.0-bin/bin/spark-on-angel-env.sh` <br>
   edit `SPARK_HOME`, `ANGEL_HOME`, `ANGEL_HDFS_HOME`
   ```
   SPARK_HOME=/usr/local/spark-2.3.0
