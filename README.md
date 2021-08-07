@@ -483,7 +483,7 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   ssh h02
   xxxxxxx
   ```
-  edit conf `cd /usr/local/spark-2.4.0/conf`
+  edit conf `cd /usr/local/spark-2.3.0/conf`
   ```
   mv spark-env.sh.template spark-env.sh 
   ```
