@@ -523,6 +523,8 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   ```
   git clone -b branch-2.4.0 https://github.com/Angel-ML/angel.git
   ```
+  change `pom.xml` in dirs `angel-ps` and `spark-on-angel`<br>
+  `netty-all-4.1.18.Final.jar` and `json4s-jackson_2.11-3.4.2.jar`<br>
   run the following command in the root directory of the source code:
   ```
   mvn clean package -Dmaven.test.skip=true
