@@ -520,6 +520,9 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   #### 2.1.1 get Angel-2.4.0<br>
   ref:https://github.com/Angel-ML/angel/blob/master/docs/deploy/source_compile_en.md <br>
   get angel-branch-2.4.0 from github <br>
+  ```
+  git clone -b branch-2.4.0 https://github.com/Angel-ML/angel.git
+  ```
   run the following command in the root directory of the source code:
   ```
   mvn clean package -Dmaven.test.skip=true
@@ -556,6 +559,9 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   ref:https://github.com/Angel-ML/PyTorch-On-Angel<br>
   #### 2.2.1 get pytorch-on-angel-0.2.0
   get pytorch-on-angel-0.2.0 from github <br>
+  ```
+  git clone -b branch-0.2.0 https://github.com/Angel-ML/PyTorch-On-Angel.git
+  ```
   change contradic settings <br>
   edit `Dockerfile`
   ```
