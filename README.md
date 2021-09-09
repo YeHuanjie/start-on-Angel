@@ -595,10 +595,10 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   ```
   upload files to hdfs
   ```
-  hdfs dfs -put /usr/local/angel-2.4.0-bin/bin/ /
-  hdfs dfs -put /usr/local/angel-2.4.0-bin/conf/ /
-  hdfs dfs -put /usr/local/angel-2.4.0-bin/data/ /
-  hdfs dfs -put /usr/local/angel-2.4.0-bin/lib/ /
+  ./hdfs dfs -put /usr/local/angel-2.4.0-bin/bin/ /
+  ./hdfs dfs -put /usr/local/angel-2.4.0-bin/conf/ /
+  ./hdfs dfs -put /usr/local/angel-2.4.0-bin/data/ /
+  ./hdfs dfs -put /usr/local/angel-2.4.0-bin/lib/ /
   ```
   #### 2.2.4 run deepfm example
   ref：https://earlytobed.notion.site/Angel-2220b7d8f3f446a3aa4c6fc3f65c4c93<br>
@@ -613,6 +613,7 @@ ref：https://zhuanlan.zhihu.com/p/59758201<br>
   spark-submit \
     --master yarn \
     --deploy-mode cluster \
+    --queue default \
     --conf spark.ps.instances=1 \
     --conf spark.ps.cores=1 \
     --conf spark.ps.jars=$SONA_ANGEL_JARS \
